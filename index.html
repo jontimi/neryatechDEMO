@@ -1,212 +1,38 @@
-<!DOCTYPE html>
-<html lang="he">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NeryaTech AR Demo - הדגמת כפתור תלת מימד/AR</title>
-    <style>
-        body {
-            margin: 0;
-            background-color: #f0f0f0;
-            overflow-x: hidden;
-        }
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var modal = document.getElementById('arModal');
+        var iframe = document.getElementById('arIframe');
+        var closeButton = document.querySelector('.close-button');
+        var arButton = document.querySelector('.my-3d-button');
 
-        .page-container {
-            width: 100%;
-            max-width: 1705px; /* הרוחב נקבע ל-1705px */
-            position: relative;
-            margin: 0 auto;
-            background-color: white;
-        }
+        if (modal && iframe && closeButton && arButton) {
+            arButton.addEventListener('click', function() {
+                var arViewerBaseURL = 'https://jontimi.github.io/3dModelARviewer/';
+                
+                // **הגדר את המותג והמודל עבור NERYATECH**
+                var brand = 'neryatech';
+                // וודא שזה שם הקובץ המדויק שמוגדר ב-script.js של ה-viewer עבור neryatech
+                var modelToLoad = 'HiveShelf90cm.glb'; 
 
-        .product-page-screenshot {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
+                var arViewerURL = arViewerBaseURL + '?brand=' + brand + '&model=' + modelToLoad;
+                
+                iframe.src = arViewerURL;
+                modal.style.display = 'flex';
+            });
 
-        .my-3d-button {
-            background-color: #aaaaaa; /* **צבע אפור כברירת מחדל** */
-            color: #ffffff; /* צבע טקסט לבן */
-            border: none; /* ללא גבול */
-            border-radius: 8px; /* מלבן עם פינות מעוגלות קלות (מפולט) */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* הוספת צל קל לעומק */
-            padding: 0.4vw 0.6vw; /* ריווח פנימי: 0.4vw למעלה/למטה, 0.6vw לצדדים (מינימלי) */
-            font-size: 1.0vw; /* גודל פונט מוקטן */
-            font-weight: normal; /* הטקסט לא מודגש */
-            font-family: 'Roboto', 'Arial Narrow', sans-serif; /* פונט בעל מראה טכנולוגי/מודרני */
-            letter-spacing: -0.05em; /* הקטנת רווח בין אותיות */
+            closeButton.addEventListener('click', function() {
+                modal.style.display = 'none';
+                iframe.src = '';
+            });
 
-            cursor: pointer;
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
-            white-space: nowrap;
-            z-index: 100;
-
-            position: absolute;
-            top: 29.95%; /* מיקום top (שנשמר מבקשתך) */
-            left: 43.1%; /* מיקום left (שנשמר מבקשתך) */
-            transform: translate(-50%, -50%);
-        }
-
-        .my-3d-button:hover {
-            background-color: #3f51b5; /* **הצבע הכחול שביקשת בריחוף** */
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* צל עמוק יותר בריחוף */
-        }
-
-        .watermark-text {
-            position: fixed;
-            top: 50%;
-            transform: translateY(-50%) rotate(-90deg);
-            font-size: 3em;
-            font-weight: bold;
-            color: rgba(0, 0, 0, 0.1);
-            white-space: nowrap;
-            z-index: 99;
-            pointer-events: none;
-            user-select: none;
-            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
-        }
-
-        .watermark-text.left {
-            left: 20px;
-        }
-
-        .watermark-text.right {
-            right: 20px;
-        }
-
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.7);
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            padding: 20px;
-            border: 1px solid #888;
-            border-radius: 8px;
-            position: relative;
-
-            width: 90vw;
-            height: 90vh;
-            max-width: 1200px;
-            max-height: 950px;
-
-            display: flex;
-            flex-direction: column;
-        }
-
-        .modal-content iframe {
-            flex-grow: 1;
-            border: none;
-            width: 100%;
-        }
-
-        .close-button {
-            color: #aaa;
-            font-size: 28px;
-            font-weight: bold;
-            align-self: flex-end;
-            cursor: pointer;
-            line-height: 1;
-            margin-bottom: 10px;
-        }
-
-        .close-button:hover,
-        .close-button:focus {
-            color: #000;
-            text-decoration: none;
-        }
-
-        @media (max-width: 768px) {
-            .watermark-text {
-                font-size: 1.5em;
-                left: -20px;
-                right: -20px;
-            }
-
-            .my-3d-button {
-                font-size: 2.5vw;
-                padding: 1.5vw 3vw;
-            }
-
-            .modal-content {
-                width: 95vw;
-                height: 95vh;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .watermark-text {
-                font-size: 1em;
-                left: -30px;
-                right: -30px;
-            }
-            .my-3d-button {
-                font-size: 3vw;
-                padding: 2vw 4vw;
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <div class="watermark-text left">NERYATECH DEMO</div>
-    <div class="watermark-text right">NERYATECH DEMO</div>
-
-    <div class="page-container">
-        <img src="./assets/neryatech_product_page_full.png" alt="צילום מסך של עמוד מוצר נריה טק" class="product-page-screenshot">
-
-        <button class="my-3d-button">3D / AR</button>
-    </div>
-
-    <div id="arModal" class="modal-overlay">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <iframe id="arIframe" src="" frameborder="0" allowfullscreen></iframe>
-        </div>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var modal = document.getElementById('arModal');
-            var iframe = document.getElementById('arIframe');
-            var closeButton = document.querySelector('.close-button');
-            var arButton = document.querySelector('.my-3d-button');
-
-            if (modal && iframe && closeButton && arButton) {
-                arButton.addEventListener('click', function() {
-                    // כתובת ה-URL של אתר ה-3D Model AR Viewer שלך (הריפוזיטורי השני)
-                    var arViewerURL = 'https://jontimi.github.io/3dModelARviewer/';
-
-                    iframe.src = arViewerURL;
-                    modal.style.display = 'flex';
-                });
-
-                closeButton.addEventListener('click', function() {
+            window.addEventListener('click', function(event) {
+                if (event.target == modal) {
                     modal.style.display = 'none';
                     iframe.src = '';
-                });
-
-                window.addEventListener('click', function(event) {
-                    if (event.target == modal) {
-                        modal.style.display = 'none';
-                        iframe.src = '';
-                    }
-                });
-            } else {
-                console.error("אחד או יותר מהאלמנטים הנדרשים עבור המודאל לא נמצאו.");
-            }
-        });
-    </script>
-
-</body>
-</html>
+                }
+            });
+        } else {
+            console.error("אחד או יותר מהאלמנטים הנדרשים עבור המודאל לא נמצאו.");
+        }
+    });
+</script>
