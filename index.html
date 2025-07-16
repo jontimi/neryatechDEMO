@@ -13,10 +13,7 @@
 
         .page-container {
             width: 100%;
-            /* המאפיין הזה חשוב! הגדר אותו לרוחב המקורי של צילום המסך המלא שלך. */
-            /* אם צילום המסך הוא ברוחב 1920px, הגדר max-width: 1920px; */
-            /* אם הרוחב המקורי גדול יותר (לדוגמה 2326px), עדכן בהתאם. */
-            max-width: 2326px; /* כוונן לרוחב המדויק של צילום המסך שלך */
+            max-width: 1705px; /* הרוחב נקבע ל-1705px */
             position: relative;
             margin: 0 auto;
             background-color: white;
@@ -29,28 +26,31 @@
         }
 
         .my-3d-button {
-            padding: 0.8vw 1.5vw;
-            font-size: 1vw;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 8px;
+            background-color: #aaaaaa; /* **צבע אפור כברירת מחדל** */
+            color: #ffffff; /* צבע טקסט לבן */
+            border: none; /* ללא גבול */
+            border-radius: 8px; /* מלבן עם פינות מעוגלות קלות (מפולט) */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* הוספת צל קל לעומק */
+            padding: 0.4vw 0.6vw; /* ריווח פנימי: 0.4vw למעלה/למטה, 0.6vw לצדדים (מינימלי) */
+            font-size: 1.0vw; /* גודל פונט מוקטן */
+            font-weight: normal; /* הטקסט לא מודגש */
+            font-family: 'Roboto', 'Arial Narrow', sans-serif; /* פונט בעל מראה טכנולוגי/מודרני */
+            letter-spacing: -0.05em; /* הקטנת רווח בין אותיות */
+
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
             white-space: nowrap;
             z-index: 100;
 
             position: absolute;
-            /* **חשוב מאוד:** התאם את הערכים האלה בדיוק! */
-            /* ערכים אלו תלויים ברוחב ובגובה של צילום המסך הספציפי שלך */
-            /* כוונן אותם עד שהכפתור ימוקם בדיוק במקום הרצוי על צילום המסך. */
-            top: 21.24%; /* דוגמה, התחל עם זה וכוונן */
-            left: 65%; /* דוגמה, התחל עם זה וכוונן */
+            top: 29.95%; /* מיקום top (שנשמר מבקשתך) */
+            left: 43.1%; /* מיקום left (שנשמר מבקשתך) */
             transform: translate(-50%, -50%);
         }
 
         .my-3d-button:hover {
-            background-color: #45a049;
+            background-color: #3f51b5; /* **הצבע הכחול שביקשת בריחוף** */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* צל עמוק יותר בריחוף */
         }
 
         .watermark-text {
@@ -163,7 +163,7 @@
     <div class="watermark-text right">NERYATECH DEMO</div>
 
     <div class="page-container">
-        <img src="./assets/neryatech_product_page_full.jpg" alt="צילום מסך של עמוד מוצר נריה טק" class="product-page-screenshot">
+        <img src="./assets/neryatech_product_page_full.png" alt="צילום מסך של עמוד מוצר נריה טק" class="product-page-screenshot">
 
         <button class="my-3d-button">3D / AR</button>
     </div>
@@ -184,7 +184,7 @@
 
             if (modal && iframe && closeButton && arButton) {
                 arButton.addEventListener('click', function() {
-                    // כתובת ה-URL של אתר ה-3D Model AR Viewer שלך
+                    // כתובת ה-URL של אתר ה-3D Model AR Viewer שלך (הריפוזיטורי השני)
                     var arViewerURL = 'https://jontimi.github.io/3dModelARviewer/';
 
                     iframe.src = arViewerURL;
