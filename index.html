@@ -26,7 +26,7 @@
         }
 
         .my-3d-button {
-            background-color: #aaaaaa; /* **צבע אפור כברירת מחדל** */
+            background-color: #aaaaaa; /* צבע אפור כברירת מחדל */
             color: #ffffff; /* צבע טקסט לבן */
             border: none; /* ללא גבול */
             border-radius: 8px; /* מלבן עם פינות מעוגלות קלות (מפולט) */
@@ -49,7 +49,7 @@
         }
 
         .my-3d-button:hover {
-            background-color: #3f51b5; /* **הצבע הכחול שביקשת בריחוף** */
+            background-color: #3f51b5; /* הצבע הכחול שביקשת בריחוף */
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* צל עמוק יותר בריחוף */
         }
 
@@ -184,9 +184,14 @@
 
             if (modal && iframe && closeButton && arButton) {
                 arButton.addEventListener('click', function() {
-                    // כתובת ה-URL של אתר ה-3D Model AR Viewer שלך (הריפוזיטורי השני)
-                    var arViewerURL = 'https://jontimi.github.io/3dModelARviewer/';
+                    var arViewerBaseURL = 'https://jontimi.github.io/3dModelARviewer/';
+                    
+                    // Set the brand to 'neryatech' and the specific model.
+                    var brand = 'neryatech';
+                    var modelToLoad = 'neryatech_120mm_table_model.glb'; // NERYATECH will display this model
 
+                    var arViewerURL = arViewerBaseURL + '?brand=' + brand + '&model=' + modelToLoad;
+                    
                     iframe.src = arViewerURL;
                     modal.style.display = 'flex';
                 });
@@ -203,7 +208,7 @@
                     }
                 });
             } else {
-                console.error("אחד או יותר מהאלמנטים הנדרשים עבור המודאל לא נמצאו.");
+                console.error("One or more required elements for the modal were not found.");
             }
         });
     </script>
