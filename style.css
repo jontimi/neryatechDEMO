@@ -30,6 +30,7 @@ body {
     left: 40vw; 
     
     /* Button sizing and style, using calc() for responsiveness */
+    /* These values serve as a base for larger screens. */
     font-size: calc(0.8vw + 8px); 
     padding: calc(0.5vw + 4px) calc(0.5vw + 8px); 
     border-radius: 0.69vw; 
@@ -108,15 +109,17 @@ body {
 /* This breakpoint targets most mobile phones in portrait orientation */
 @media (max-width: 768px) {
     .my-3d-button {
-        /* ⭐ CRITICAL: Adjust 'top' and 'left' (or 'right'/'bottom') for phone view ⭐ */
-        /* Based on your screenshots, the table in the product image appears much higher up.
-           You'll need to experiment with these values. Start with something much smaller for 'top'. */
-        top: 30vw; /* EXAMPLE: Try a significantly smaller 'vw' value to move it higher */
-        left: 65vw; /* EXAMPLE: Adjust 'left' or consider using 'right' if that fits your design */
-        /* If the button's size feels off on mobile, you can adjust the calc() here too,
-           e.g., make the px value slightly larger for a minimum: */
-        /* font-size: calc(1vw + 10px); */
-        /* padding: calc(0.8vw + 6px) calc(1vw + 10px); */
+        /* Position that works for your phone's desktop view (from your input) */
+        top: 54vw; 
+        left: 35vw; 
+        
+        /* ⭐ ADJUSTED: Reduce font-size and padding for smaller screens ⭐ */
+        /* Lower the 'px' values in calc() to make the button and text smaller on mobile */
+        font-size: calc(0.5vw + 6px); /* Example: Smaller base font size */
+        padding: calc(0.3vw + 3px) calc(0.3vw + 6px); /* Example: Smaller base padding */
+        
+        /* You might also want to adjust border-radius here if it looks too big */
+        /* border-radius: 5px; */ /* Example of a fixed pixel value for smaller screens */
     }
 }
 
@@ -124,7 +127,9 @@ body {
 @media (max-width: 480px) {
     .my-3d-button {
         /* If the 768px breakpoint isn't perfect for very small phones, adjust further */
-        /* top: 32vw; */
-        /* left: 60vw; */
+        /* top: XXvw; */
+        /* left: YYvw; */
+        /* font-size: calc(0.4vw + 5px); */
+        /* padding: calc(0.2vw + 2px) calc(0.2vw + 4px); */
     }
 }
