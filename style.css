@@ -25,12 +25,12 @@ body {
 
 .my-3d-button {
     position: absolute;
-    /* Desktop/Larger Screen Defaults - Your current values */
+    /* PC Desktop View Defaults */
+    /* These values are optimized for your main PC desktop screen */
     top: 55.5vw; 
     left: 40vw; 
     
     /* Button sizing and style, using calc() for responsiveness */
-    /* These values serve as a base for larger screens. */
     font-size: calc(0.8vw + 8px); 
     padding: calc(0.5vw + 4px) calc(0.5vw + 8px); 
     border-radius: 0.69vw; 
@@ -105,28 +105,50 @@ body {
     border-bottom-right-radius: 8px;
 }
 
-/* ⭐ Media Queries for Mobile Phone View (Regular/Non-Desktop View) ⭐ */
-/* This breakpoint targets most mobile phones in portrait orientation */
+/* Media Query for Portrait Mobile Phone View (Regular/Non-Desktop View) */
 @media (max-width: 768px) {
     .my-3d-button {
-        /* Position that works for your phone's desktop view (from your input) */
+        /* Position and size for portrait mode phones */
         top: 54vw; 
         left: 35vw; 
+        font-size: calc(0.5vw + 6px); 
+        padding: calc(0.3vw + 3px) calc(0.3vw + 6px); 
+    }
+}
+
+/* Media Query for Landscape Orientation on Mobile/Tablet */
+@media (orientation: landscape) and (max-height: 768px) {
+    .my-3d-button {
+        /* Position and size for landscape mode phones/small tablets */
+        top: 53.5vw; 
+        left: 37vw; 
+        /* Adjust font-size/padding if needed for landscape */
+        /* font-size: calc(0.7vw + 7px); */
+        /* padding: calc(0.4vw + 4px) calc(0.4vw + 8px); */
+    }
+}
+
+/* ⭐ NEW: Media Query for "Phone in Desktop View" ⭐ */
+/* This targets devices with a small physical screen but a wide viewport (e.g., iPhone/Android in Desktop Site mode) */
+/* Adjust the 'top' and 'left' values here to position the button correctly when viewed on a phone forcing desktop mode. */
+@media (min-width: 992px) and (max-device-width: 768px) {
+    .my-3d-button {
+        /* ⭐ ADJUST THESE VALUES for your phone's desktop view ⭐ */
+        /* These will override the default desktop values only on a phone forcing desktop mode */
+        top: 58vw; /* Example: Adjust this for vertical position in phone desktop view */
+        left: 42vw; /* Example: Adjust this for horizontal position in phone desktop view */
         
-        /* ⭐ ADJUSTED: Reduce font-size and padding for smaller screens ⭐ */
-        /* Lower the 'px' values in calc() to make the button and text smaller on mobile */
-        font-size: calc(0.5vw + 6px); /* Example: Smaller base font size */
-        padding: calc(0.3vw + 3px) calc(0.3vw + 6px); /* Example: Smaller base padding */
-        
-        /* You might also want to adjust border-radius here if it looks too big */
-        /* border-radius: 5px; */ /* Example of a fixed pixel value for smaller screens */
+        /* You might also want to adjust size if it looks off */
+        /* font-size: calc(0.7vw + 7px); */
+        /* padding: calc(0.4vw + 4px) calc(0.4vw + 8px); */
     }
 }
 
 /* Optional: Even narrower screens (e.g., iPhone SE, older Androids) */
 @media (max-width: 480px) {
     .my-3d-button {
-        /* If the 768px breakpoint isn't perfect for very small phones, adjust further */
+        /* This media query will apply only to very narrow screens, regardless of orientation.
+           It might need specific adjustments if the 768px breakpoint isn't perfect. */
         /* top: XXvw; */
         /* left: YYvw; */
         /* font-size: calc(0.4vw + 5px); */
