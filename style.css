@@ -25,23 +25,19 @@ body {
 
 .my-3d-button {
     position: absolute;
-    /* Position with VW units - these should maintain relative placement */
+    /* Desktop/Larger Screen Defaults - Your current values */
     top: 55.5vw; 
     left: 40vw; 
     
-    /* ⭐ IMPROVED: Use calc() for font-size and padding to ensure a minimum size ⭐ */
-    /* This prevents the button/text from becoming too tiny on very small screens */
-    font-size: calc(0.8vw + 8px); /* Example: Scales with vw, but never goes below 8px (adjust 8px for desired min size) */
-    padding: calc(0.5vw + 4px) calc(0.5vw + 8px); /* Example: Scales, with a minimum of 4px vertical, 8px horizontal */
+    /* Button sizing and style, using calc() for responsiveness */
+    font-size: calc(0.8vw + 8px); 
+    padding: calc(0.5vw + 4px) calc(0.5vw + 8px); 
+    border-radius: 0.69vw; 
     
     font-weight: bold;
     background-color: #3C4EF8; 
     color: white;
     border: none;
-    /* ⭐ IMPROVED: Make border-radius scale with vw as well ⭐ */
-    border-radius: 0.69vw; /* (9px / 1280px) * 100vw = 0.703vw. Let's use 0.69vw for consistency or calc() for flexibility. */
-    /* Or, for a minimum: border-radius: calc(0.5vw + 4px); */
-
     cursor: pointer;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     transition: background-color 0.3s ease;
@@ -108,21 +104,27 @@ body {
     border-bottom-right-radius: 8px;
 }
 
-/* ⭐ Media Queries for fine-tuning button POSITION on specific mobile breakpoints ⭐ */
-/* Use these ONLY if the vw positioning isn't perfect across all mobile sizes */
+/* ⭐ Media Queries for Mobile Phone View (Regular/Non-Desktop View) ⭐ */
+/* This breakpoint targets most mobile phones in portrait orientation */
 @media (max-width: 768px) {
     .my-3d-button {
-        /* Example adjustments: */
-        /* If the button looks too far left/right or up/down on tablets/larger phones: */
-        /* left: 38vw; */ 
-        /* top: 56vw; */ 
+        /* ⭐ CRITICAL: Adjust 'top' and 'left' (or 'right'/'bottom') for phone view ⭐ */
+        /* Based on your screenshots, the table in the product image appears much higher up.
+           You'll need to experiment with these values. Start with something much smaller for 'top'. */
+        top: 30vw; /* EXAMPLE: Try a significantly smaller 'vw' value to move it higher */
+        left: 65vw; /* EXAMPLE: Adjust 'left' or consider using 'right' if that fits your design */
+        /* If the button's size feels off on mobile, you can adjust the calc() here too,
+           e.g., make the px value slightly larger for a minimum: */
+        /* font-size: calc(1vw + 10px); */
+        /* padding: calc(0.8vw + 6px) calc(1vw + 10px); */
     }
 }
 
+/* Optional: Even narrower screens (e.g., iPhone SE, older Androids) */
 @media (max-width: 480px) {
     .my-3d-button {
-        /* Example adjustments for smaller phones (e.g., iPhone SE, older Androids) */
-        /* left: 37vw; */
-        /* top: 57vw; */
+        /* If the 768px breakpoint isn't perfect for very small phones, adjust further */
+        /* top: 32vw; */
+        /* left: 60vw; */
     }
 }
