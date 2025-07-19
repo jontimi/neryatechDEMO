@@ -6,36 +6,42 @@ html, body {
 
 body {
     font-family: sans-serif;
-    background-color: #f0f0f0;
+    background-color: #f0f0f0; 
     overflow-x: hidden; 
     overflow-y: auto;   
 }
 
 .page-container {
     width: 100vw; 
-    height: 3558px; /* Fixed height to ensure image has space */
-    position: relative;
-    margin: 0 auto;
+    height: 0; 
+    padding-top: 277.96875%; /* (3558 / 1280) * 100% to match image aspect ratio */
+    position: relative; 
+    margin: 0 auto; 
     background-image: url('assets/neryatech_product_page_full.png'); 
-    background-size: contain; /* ⭐ Set to 'contain' to ensure full image visibility without cropping, allowing for empty space ⭐ */
-    background-position: center top; /* Center horizontally, align to top vertically */
+    background-size: contain; 
+    background-position: center top; 
     background-repeat: no-repeat; 
 }
 
 .my-3d-button {
-    /* Position using percentages relative to the container */
     position: absolute;
-    top: 24.1%;  /* Calculated percentage based on 295px / 3558px */
-    left: 41%; /* Calculated percentage based on 240px / 1280px */
+    /* Position with VW units - these should maintain relative placement */
+    top: 55.5vw; 
+    left: 40vw; 
     
-    /* Appearance - Using Nerya Tec's blue colors */
-    padding: 10px 15px; 
-    font-size: 16px;    
+    /* ⭐ IMPROVED: Use calc() for font-size and padding to ensure a minimum size ⭐ */
+    /* This prevents the button/text from becoming too tiny on very small screens */
+    font-size: calc(0.8vw + 8px); /* Example: Scales with vw, but never goes below 8px (adjust 8px for desired min size) */
+    padding: calc(0.5vw + 4px) calc(0.5vw + 8px); /* Example: Scales, with a minimum of 4px vertical, 8px horizontal */
+    
     font-weight: bold;
     background-color: #3C4EF8; 
     color: white;
     border: none;
-    border-radius: 5px;
+    /* ⭐ IMPROVED: Make border-radius scale with vw as well ⭐ */
+    border-radius: 0.69vw; /* (9px / 1280px) * 100vw = 0.703vw. Let's use 0.69vw for consistency or calc() for flexibility. */
+    /* Or, for a minimum: border-radius: calc(0.5vw + 4px); */
+
     cursor: pointer;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     transition: background-color 0.3s ease;
@@ -46,7 +52,7 @@ body {
     background-color: #2E3DE1; 
 }
 
-/* The Modal (background) - Generic styles for the 3D viewer pop-up */
+/* Modal and Iframe styles (no changes needed) */
 .modal {
     display: none; 
     position: fixed; 
@@ -62,7 +68,6 @@ body {
     flex-direction: column;
 }
 
-/* Modal Content/Box */
 .modal-content-iframe {
     background-color: #fefefe;
     margin: auto;
@@ -79,7 +84,6 @@ body {
     flex-direction: column; 
 }
 
-/* The Close Button for the modal */
 .close-button {
     color: #aaa;
     align-self: flex-end; 
@@ -96,11 +100,29 @@ body {
     text-decoration: none;
 }
 
-/* Iframe styling */
 #arIframe {
     width: 100%;
     flex-grow: 1; 
     border: none; 
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
+}
+
+/* ⭐ Media Queries for fine-tuning button POSITION on specific mobile breakpoints ⭐ */
+/* Use these ONLY if the vw positioning isn't perfect across all mobile sizes */
+@media (max-width: 768px) {
+    .my-3d-button {
+        /* Example adjustments: */
+        /* If the button looks too far left/right or up/down on tablets/larger phones: */
+        /* left: 38vw; */ 
+        /* top: 56vw; */ 
+    }
+}
+
+@media (max-width: 480px) {
+    .my-3d-button {
+        /* Example adjustments for smaller phones (e.g., iPhone SE, older Androids) */
+        /* left: 37vw; */
+        /* top: 57vw; */
+    }
 }
